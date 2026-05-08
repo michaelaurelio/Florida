@@ -16,12 +16,20 @@ jobs:
       FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
     steps:
-      - name: Set Frida Version to 17.7.3
+      - name: Pull Frida Latest Release
         id: pullFridaLatestRelease
         uses: actions/github-script@v3
         with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
           script: |
-            core.setOutput('FRIDA_VERSION', '17.7.3');
+            const releaseResponse = await github.repos.getLatestRelease({
+              owner: 'frida',
+              repo: 'frida',
+            })
+            const {
+              data: { tag_name: ver }
+            } = releaseResponse;
+            core.setOutput('FRIDA_VERSION', ver);
 
       - name: Split Repository Name
         id: split_name
