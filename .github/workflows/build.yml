@@ -16,20 +16,9 @@ jobs:
       FRIDA_VERSION: ${{ steps.pullFridaLatestRelease.outputs.FRIDA_VERSION }}
       ALREADY_RELEASE: ${{ steps.checkReleaseVersion.outputs.ALREADY_RELEASE }}
     steps:
-      - name: Pull Frida Latest Release
+      - name: Pin Frida Release Version
         id: pullFridaLatestRelease
-        uses: actions/github-script@v3
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            const releaseResponse = await github.repos.getLatestRelease({
-              owner: 'frida',
-              repo: 'frida',
-            })
-            const {
-              data: { tag_name: ver }
-            } = releaseResponse;
-            core.setOutput('FRIDA_VERSION', ver);
+        run: echo "FRIDA_VERSION=17.28.0" >> "$GITHUB_OUTPUT"
 
       - name: Split Repository Name
         id: split_name
@@ -143,7 +132,7 @@ jobs:
         export ANDROID_NDK_ROOT=${{ steps.setup-ndk.outputs.ndk-path }}
         echo "ANDROID_NDK_ROOT=$ANDROID_NDK_ROOT"
         
-        git clone --recurse-submodules https://github.com/frida/frida
+        git clone --recurse-submodules -b ${{ needs.check_version.outputs.FRIDA_VERSION }} https://github.com/frida/frida
         cd frida
         for path in ../patches/*
         do
