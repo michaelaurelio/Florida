@@ -1,17 +1,17 @@
-From e8d464a18de6e97d3e84c4c3cb5c73b807586798 Mon Sep 17 00:00:00 2001
+From cfa142ad5300e854e91174b75833336aa3b3d2f3 Mon Sep 17 00:00:00 2001
 From: Ylarod <me@ylarod.cn>
 Date: Tue, 18 Jul 2023 16:04:55 +0800
-Subject: [PATCH 6/9] Florida: protocol_unexpected_command
+Subject: [PATCH 06/10] Florida: protocol_unexpected_command
 
 ---
- src/droidy/droidy-client.vala | 2 +-
+ src/adb.vala | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/src/droidy/droidy-client.vala b/src/droidy/droidy-client.vala
-index ddc56ccc..c3464e77 100644
---- a/src/droidy/droidy-client.vala
-+++ b/src/droidy/droidy-client.vala
-@@ -1015,7 +1015,7 @@ namespace Frida.Droidy {
+diff --git a/src/adb.vala b/src/adb.vala
+index 65164f11..37487ee6 100644
+--- a/src/adb.vala
++++ b/src/adb.vala
+@@ -1017,7 +1017,7 @@ namespace Frida {
  						case "OPEN":
  						case "CLSE":
  						case "WRTE":
@@ -20,6 +20,3 @@ index ddc56ccc..c3464e77 100644
  
  						default:
  							var length = parse_length (command_or_length);
--- 
-2.42.0
-

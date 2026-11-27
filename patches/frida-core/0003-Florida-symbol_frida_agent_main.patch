@@ -1,7 +1,7 @@
-From 9461ace8e7960017d0e4137245e44c3b170b7c9d Mon Sep 17 00:00:00 2001
+From 8591747e96124c00e7e20e9f5d013cf9e52bab11 Mon Sep 17 00:00:00 2001
 From: michaelaurelio <mikeaurelio3103@gmail.com>
 Date: Mon, 11 May 2026 02:11:41 +0700
-Subject: [PATCH] Florida: patch fix symbol_frida_agent_main (17.9.7)
+Subject: [PATCH 03/10] Florida: patch fix symbol_frida_agent_main (17.9.7)
 
 ---
  src/agent-container.vala              |  2 +-
@@ -15,7 +15,7 @@ Subject: [PATCH] Florida: patch fix symbol_frida_agent_main (17.9.7)
  create mode 100644 src/anti-anti-frida.py
 
 diff --git a/src/agent-container.vala b/src/agent-container.vala
-index eecfa1f6..86eb9f4a 100644
+index c2c2c3b0..38d13def 100644
 --- a/src/agent-container.vala
 +++ b/src/agent-container.vala
 @@ -28,7 +28,7 @@ namespace Frida {
@@ -62,10 +62,10 @@ index 00000000..a203189f
 +    binary.write(input_file)
 \ No newline at end of file
 diff --git a/src/darwin/darwin-host-session.vala b/src/darwin/darwin-host-session.vala
-index 3d18cf07..b7d7b9a1 100644
+index 5c97e3d0..112b2aac 100644
 --- a/src/darwin/darwin-host-session.vala
 +++ b/src/darwin/darwin-host-session.vala
-@@ -295,7 +295,7 @@ namespace Frida {
+@@ -322,7 +322,7 @@ namespace Frida {
  		private async uint inject_agent (uint pid, string agent_parameters, Cancellable? cancellable) throws Error, IOError {
  			uint id;
  
@@ -75,10 +75,10 @@ index 3d18cf07..b7d7b9a1 100644
  			id = yield fruitjector.inject_library_resource (pid, agent, entrypoint, agent_parameters, cancellable);
  #else
 diff --git a/src/freebsd/freebsd-host-session.vala b/src/freebsd/freebsd-host-session.vala
-index 245747ab..3cd11aff 100644
+index aadf02e7..2dedbe1a 100644
 --- a/src/freebsd/freebsd-host-session.vala
 +++ b/src/freebsd/freebsd-host-session.vala
-@@ -132,7 +132,7 @@ namespace Frida {
+@@ -147,7 +147,7 @@ namespace Frida {
  
  			var stream_request = Pipe.open (t.local_address, cancellable);
  
@@ -88,10 +88,10 @@ index 245747ab..3cd11aff 100644
  			injectee_by_pid[pid] = id;
  
 diff --git a/src/linux/linux-host-session.vala b/src/linux/linux-host-session.vala
-index 3a500c31..25627aeb 100644
+index 73d9c2a2..3a94bb54 100644
 --- a/src/linux/linux-host-session.vala
 +++ b/src/linux/linux-host-session.vala
-@@ -387,7 +387,7 @@ namespace Frida {
+@@ -408,7 +408,7 @@ namespace Frida {
  		protected override async Future<IOStream> perform_attach_to (uint pid, HashTable<string, Variant> options,
  				Cancellable? cancellable, out Object? transport) throws Error, IOError {
  			uint id;
@@ -101,10 +101,10 @@ index 3a500c31..25627aeb 100644
  			AgentFeatures features = CONTROL_CHANNEL;
  			var linjector = (Linjector) injector;
 diff --git a/src/qnx/qnx-host-session.vala b/src/qnx/qnx-host-session.vala
-index 7d5b3e51..3d7fb982 100644
+index c3650e6c..6b9a7fcb 100644
 --- a/src/qnx/qnx-host-session.vala
 +++ b/src/qnx/qnx-host-session.vala
-@@ -117,7 +117,7 @@ namespace Frida {
+@@ -120,7 +120,7 @@ namespace Frida {
  
  			var stream_request = Pipe.open (t.local_address, cancellable);
  
@@ -114,10 +114,10 @@ index 7d5b3e51..3d7fb982 100644
  			injectee_by_pid[pid] = id;
  
 diff --git a/src/windows/windows-host-session.vala b/src/windows/windows-host-session.vala
-index 167ea742..3b503f30 100644
+index 57f70d1c..87f11d6b 100644
 --- a/src/windows/windows-host-session.vala
 +++ b/src/windows/windows-host-session.vala
-@@ -251,11 +251,11 @@ namespace Frida {
+@@ -254,11 +254,11 @@ namespace Frida {
  
  			var winjector = injector as Winjector;
  #if HAVE_EMBEDDED_ASSETS
@@ -131,6 +131,3 @@ index 167ea742..3b503f30 100644
  				make_agent_parameters (pid, t.remote_address, options),
  				installed_agent_dependencies (), cancellable);
  #endif
--- 
-2.51.0
-

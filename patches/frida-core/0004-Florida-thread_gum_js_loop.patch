@@ -1,7 +1,7 @@
-From 951000ce3fddb965ffdf6e3d5e765e7f457683da Mon Sep 17 00:00:00 2001
+From 636d8aca448638e978a126f8132523b6ab3e6450 Mon Sep 17 00:00:00 2001
 From: Ylarod <me@ylarod.cn>
 Date: Tue, 18 Jul 2023 16:03:47 +0800
-Subject: [PATCH 4/9] Florida: thread_gum_js_loop
+Subject: [PATCH 04/10] Florida: thread_gum_js_loop
 
 ---
  src/anti-anti-frida.py | 7 ++++++-
@@ -24,6 +24,3 @@ index a203189f..7a3f6474 100644
 +    print(f"[*] Patch `gum-js-loop` to `{random_name}`")
 +    os.system(f"sed -b -i s/gum-js-loop/{random_name}/g {input_file}")
 \ No newline at end of file
--- 
-2.42.0
-
